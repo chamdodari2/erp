@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceCompatibility= 1.8 //컴파일할 때 적용할 java code의 jdkversion 지정
+
+//인코딩지정
+tasks.withType(JavaCompile) {
+   options.encoding= 'UTF-8'
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+repositories { //의존성에 문제가 발생했을때 제이센터에 접속해서 가져온다
+    jcenter()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java 사이트에서 검색해서 가져와서 가져다붙인다.
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.49'  //이렇게 설정하면 팀원들 모두 5.1.49로 고정된다.
+	implementation group: 'com.toedter', name: 'jcalendar', version: '1.4'
+    testImplementation 'junit:junit:4.13'
+    // https://mvnrepository.com/artifact/com.toedter/jcalendar
+
+    
+}
+
+jar {
+    version = 1.0
+    mainClassName= 'erp.Erp'
+    baseName= 'Erp'
+    appendix = 'bin'
+    
+    manifest{
+        attributes 'Title': baseName, 'Version': version, 'Main-Class': mainClassName
+    }
+    dependsOn configurations.runtime// 실행 가능한jar 파일설정. 이게 들어가야만 실행가능하다.
+    
+}
+
