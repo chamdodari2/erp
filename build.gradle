@@ -30,7 +30,7 @@ dependencies {
 
 jar {
     version = 1.0
-    mainClassName= 'erp.Erp'
+    mainClassName= 'erp.Main'
     baseName= 'Erp'
     appendix = 'bin'
     
