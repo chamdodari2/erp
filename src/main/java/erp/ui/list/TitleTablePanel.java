@@ -13,9 +13,12 @@ import erp.dto.Title;
 import erp.service.TitleService;
 
 @SuppressWarnings("serial")
-public class TitleTablePanel extends AbstractCustomTablePanel<Title> {
+public class TitleTablePanel extends AbstractCustomTablePanel<Title> {//부모클래스를 Title 타입으로 상속받아서
+	public TitleTablePanel() {  //기본생성자
+	}
 	//////////////츄가 1!!!!!!!  0312
-	private TitleService service = new TitleService();
+	private TitleService service = new TitleService();   //객체생성. Titleservice 
+	
 	
 	/////////////////////
 	@Override

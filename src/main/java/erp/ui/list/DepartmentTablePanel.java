@@ -13,9 +13,12 @@ import javax.swing.table.TableColumnModel;
 
 import erp.dto.Department;
 import erp.service.DepartmentService;
+import erp.service.TitleService;
 
 	@SuppressWarnings("serial")
 public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
+		public DepartmentTablePanel() {
+		}
 		
 		private DepartmentService service = new DepartmentService();
 ///////
@@ -25,6 +28,10 @@ public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
 			list = service.showDepartment();  //리스트에 타이틀 목록이 들어오게한다
 		}
 
+		public void setService(DepartmentService service) {
+			this.service = service;
+		}
+		
 		@Override
 		protected void setAlignAndWidth() {
 			// 컬럼내용 정렬

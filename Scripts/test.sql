@@ -44,3 +44,11 @@ group by tno;
 
 
 select * from empl
+
+-- 해당 부서의 사원목록 검색
+
+select empno, empname from employee e
+join department d  
+	on e.dept  =d.deptNo 
+	where deptNo = 4;
+	

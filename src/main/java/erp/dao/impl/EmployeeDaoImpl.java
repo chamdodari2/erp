@@ -221,6 +221,32 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 		return null;
 	}
 
+	@Override
+	public List<Employee> SelectEmployeeByDepartment(Department department) {			
+		String sql = "select empno, empname from employee e " + 
+				"join department d  " + 
+				"	on e.dept  =d.deptNo " + 
+				"	where deptNo = ?";
+		try (Connection con = JdbcConn.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, department.getDeptNo());  //첫번쨰 매개변수에 
+			
+			try (ResultSet rs = pstmt.executeQuery()) {  //			
+				if (rs.next()) {				
+					List<Employee> list = new ArrayList<>();
+					do {
+						list.add((new Employee(rs.getInt("empno"),rs.getString("empname"))));
+					}while (rs.next());					
+					return  list; 
+				}
+
+			}
+		} catch (SQLException e) {
+ 
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 
 }

@@ -2,6 +2,7 @@ package erp.dao;
 
 import java.util.List;
 
+import erp.dto.Department;
 import erp.dto.Employee;
 import erp.dto.Title;
 
@@ -16,11 +17,9 @@ public interface EmployeeDao { //인터페이스 선언
 	int updateEmployee(Employee employee);
 	int deleteEmployee(Employee employee); //int에서 변경
 	
-	
-//	Employee selectEmpListByTitle(Title title);
-//	List<Employee> test06SelectEmployeeByTitle(Title title);
-//	Employee selectEmpListByTitle(Title title);
+
 	List<Employee> SelectEmployeeByTitle(Title title);
+	List<Employee> SelectEmployeeByDepartment(Department department);
 	
 	
 

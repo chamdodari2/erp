@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import erp.ui.DepartmentManager;
 import erp.ui.TitleManager;
 
 import java.awt.GridLayout;
@@ -18,10 +19,9 @@ public class Main extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnTitle;
+	private JButton btnDepartment;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,7 +53,8 @@ public class Main extends JFrame implements ActionListener {
 		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
 		
-		JButton btnDepartment = new JButton("부서관리");
+		btnDepartment = new JButton("부서관리");
+		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 		
 		JButton btnEmployee = new JButton("사원 관리");
@@ -61,6 +62,9 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDepartment) {
+			actionPerformedBtnDepartment(e);
+		}
 		if (e.getSource() == btnTitle) {
 			actionPerformedBtnTitle(e);
 		}
@@ -68,5 +72,11 @@ public class Main extends JFrame implements ActionListener {
 	protected void actionPerformedBtnTitle(ActionEvent e) {
 		TitleManager frame = new TitleManager();
 		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnDepartment(ActionEvent e) {
+		DepartmentManager frame = new DepartmentManager();
+		frame.setVisible(true);
+		
+		
 	}
 }
