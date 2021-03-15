@@ -80,4 +80,12 @@ public class EmployeeDaoTest {
 		Assert.assertEquals(1, res);//
 		dao.selectEmployeeByAll().stream().forEach(System.out::println);
 	}
+	@Test
+	public void test07SelectEmployeeByDepartment() {
+		System.out.printf("%s()%n","test07SelectEmployeeByDepartment");
+		List<Employee> res  = dao.SelectEmployeeByDepartment(new Department(3));
+		Assert.assertEquals(1, res);//
+		dao.selectEmployeeByAll().stream().forEach(System.out::println);
+	}
+	
 }

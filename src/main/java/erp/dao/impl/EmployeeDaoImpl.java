@@ -78,7 +78,7 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 				manager.setEmpName(rs.getNString("manager_name"));
 			}catch (SQLException e ) {}
 			try {
-				dept.setDeptName(rs.getString("dept_name"));
+				dept.setDeptName(rs.getString("deptname"));//////////////////////이름 동일한지 확인하기!
 			}catch(SQLException e) {}
 			try {
 				 dept.setFloor(rs.getInt("floor"));
@@ -207,15 +207,13 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 			try (ResultSet rs = pstmt.executeQuery()) {  //			
 				if (rs.next()) {				
 					List<Employee> list = new ArrayList<>();
-					do {
+					do {					
 						list.add((new Employee(rs.getInt("empno"),rs.getString("empname"))));
 					}while (rs.next());					
 					return  list; 
 				}
-
 			}
 		} catch (SQLException e) {
- 
 			e.printStackTrace();
 		}
 		return null;

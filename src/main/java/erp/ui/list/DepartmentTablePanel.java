@@ -28,7 +28,7 @@ public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
 			list = service.showDepartment();  //리스트에 타이틀 목록이 들어오게한다
 		}
 
-		public void setService(DepartmentService service) {
+		public void setService(DepartmentService service) { //3 
 			this.service = service;
 		}
 		

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ import erp.dto.Department;
 import erp.dto.Employee;
 import erp.service.DepartmentService;
 import erp.ui.content.DeptPanel;
+import erp.ui.content.InterFaceItem;
 import erp.ui.exception.InvalidChechException;
 import erp.ui.exception.NotSelectedException;
 import erp.ui.exception.SqlConstraintException;
@@ -28,7 +30,7 @@ import erp.ui.list.DepartmentTablePanel;
 public class DepartmentManager extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private DeptPanel pContent;
+	private InterFaceItem<Department> pContent;  //////////7. 이렇게 수정
 	private JPanel pBtns;
 	private DepartmentTablePanel pList;
 	private JButton btnAdd;
@@ -49,8 +51,8 @@ public class DepartmentManager extends JFrame implements ActionListener{
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
 		pContent = new DeptPanel();
-		contentPane.add(pContent);
-		pContent.setLayout(new GridLayout(0, 2, 0, 0));
+		contentPane.add((DeptPanel)pContent);
+//		( pContent).setLayout(new GridLayout(0, 2, 0, 0));///////////
 		
 		pBtns = new JPanel();
 		contentPane.add(pBtns);
@@ -105,7 +107,7 @@ try {
 				}
 				if(e.getActionCommand().equals("수정")) { 
 					Department updateDepartment = pList.getItem();
-					pContent.setDepartment(updateDepartment);
+					pContent.setItem(updateDepartment);
 					btnAdd.setText("수정");
 				//	service.removeTitle(delTitle);
 				//	pList.loadData();
@@ -168,13 +170,13 @@ try {
 		}
 	}
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		Department department = pContent.getDepartment();
+		Department department = pContent.getItem();
 		service.modifyDepartment(department);
 		pList.loadData();
 		
 	}
 	private void actionPerformedBtnAdd(ActionEvent e) {
-		Department department = pContent.getDepartment();
+		Department department = pContent.getItem();
 		service.addDepartment(department);
 		pList.loadData();
 		pContent.clearTf();

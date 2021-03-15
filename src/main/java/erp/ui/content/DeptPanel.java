@@ -5,13 +5,14 @@ import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 
 import erp.dto.Department;
+import erp.ui.exception.InvalidChechException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class DeptPanel extends JPanel {
+public class DeptPanel extends InterFaceItem<Department> {
 	private JTextField tfDeptNo;
 	private JTextField tfDeptName;
 	private JTextField tfFloor;
@@ -20,7 +21,9 @@ public class DeptPanel extends JPanel {
 
 		initialize();
 	}
-	private void initialize() {
+	
+	@Override
+	public void initialize() {
 		
 		
 		
@@ -51,23 +54,33 @@ public class DeptPanel extends JPanel {
 		tfFloor.setColumns(10);
 		add(tfFloor);
 	}
-	public Department getDepartment() {
-		int deptNo = Integer.parseInt(tfDeptNo.getText().trim());
-		String deptName = tfDeptName.getText().trim();
-		int floor = Integer.parseInt(tfFloor.getText().trim());
-		return new Department(deptNo,deptName,floor);
-	}
-	public void setDepartment(Department department) {
-	tfDeptNo.setText(department.getDeptNo() + "");
-	tfDeptName.setText(department.getDeptName() + "");
-	tfFloor.setText(department.getFloor() + "");
-	
-	}
+
+	@Override
 	public void clearTf() {
 		tfDeptNo.setText("");
 		tfDeptName.setText("");
 		tfFloor.setText("");
 		
+	}
+	@Override
+	public void setItem(Department item) {
+		tfDeptNo.setText(item.getDeptNo() + "");
+		tfDeptName.setText(item.getDeptName() + "");
+		tfFloor.setText(item.getFloor() + "");
+		
+	}
+	@Override
+	public Department getItem() {
+		int deptNo = Integer.parseInt(tfDeptNo.getText().trim());
+		String deptName = tfDeptName.getText().trim();
+		int floor = Integer.parseInt(tfFloor.getText().trim());
+		return new Department(deptNo,deptName,floor);
+	}
+	@Override
+	public void validCheck() {
+		if (tfDeptNo.getText().contentEquals("") || tfDeptName.getText().equals("")) {
+			throw new InvalidChechException();
+		}
 	}
 	
 }

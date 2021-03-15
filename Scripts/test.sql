@@ -51,4 +51,10 @@ select empno, empname from employee e
 join department d  
 	on e.dept  =d.deptNo 
 	where deptNo = 4;
-	
+
+
+-- 수업
+
+select * from employee  where empno =1003; 
+select  empno,empname,title_no,title_name,manager_no, manager_name,salary,deptno,deptname,floor
+ from vw_full_employee;
