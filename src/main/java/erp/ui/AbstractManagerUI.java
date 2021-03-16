@@ -121,9 +121,9 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
    
    protected abstract void tableLoadData();
    
-   protected abstract TitlePanel createContentPanel();
+   protected abstract AbstractContentPanel<T> createContentPanel();   ///
    
-   protected abstract TitleTablePanel createTablePanel();
+   protected abstract AbstractCustomTablePanel<T> createTablePanel();///
 
    protected abstract void actionPerformedMenuGubun();
 
