@@ -17,10 +17,12 @@ import javax.swing.border.EmptyBorder;
 import erp.dto.Employee;
 import erp.dto.Title;
 import erp.service.TitleService;
+import erp.ui.content.AbstractContentPanel;
 import erp.ui.content.TitlePanel;
 import erp.ui.exception.InvalidChechException;
 import erp.ui.exception.NotSelectedException;
 import erp.ui.exception.SqlConstraintException;
+import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.TitleTablePanel;
 
 @SuppressWarnings("serial")
@@ -28,15 +30,30 @@ public class TitleManager extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnAdd;
-	private TitlePanel pContent;
-	private TitleTablePanel pList;
+	
+	private AbstractContentPanel<Title> pContent;  /////AbstractContentPanel<Title> 로 해줭햐ㅏㅁ
+	private AbstractCustomTablePanel<Title> pList;
+	
 	private TitleService service;
 	
 	public TitleManager() {
-		service = new TitleService();
-		initialize();
+		setService();  //서비스 연결기능 만듬
+		initialize();    //	service = new TitleService();  // 위에꺼 한줄로로 변경
+		tableLoadData();    //  loadDate기능       -  셋서비스,로드데이터 두줄을 하나의 메소드로 묶음
+		
+		
+	}
+
+	public void tableLoadData() {
+		((TitleTablePanel) pList).setService(service);   //TitleTablePanel로 감싸주었음 안감싸주면 안먹는다
+		pList.loadData();
 	}
 	
+	private void setService() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void initialize() {
 		setTitle("직책 관리");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -46,7 +63,7 @@ public class TitleManager extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
-		pContent = new TitlePanel();
+		pContent = createContentPanel();  //////블럭지정해서  메소드로 뺀거임 원래는 new 붙어잇었음
 		contentPane.add(pContent);
 		
 		JPanel pBtns = new JPanel();
@@ -59,13 +76,20 @@ public class TitleManager extends JFrame implements ActionListener {
 		JButton btnClear = new JButton("취소");
 		pBtns.add(btnClear);
 		
-		pList = new TitleTablePanel();
-		pList.setService(service);
-		pList.loadData();
+		pList = createTablePanel();   //블럭지정해서  메소드로 뺀거임 원래는 new 붙어잇었음
+		
 		contentPane.add(pList);
 		
 		JPopupMenu popupMenu = createPopupMenu();
 		pList.setPopupMenu(popupMenu);
+	}
+
+	public TitleTablePanel createTablePanel() {
+		return new TitleTablePanel();
+	}
+
+	public TitlePanel createContentPanel() {
+		return new TitlePanel();
 	}
 
 	private JPopupMenu createPopupMenu() {
