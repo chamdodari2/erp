@@ -58,3 +58,13 @@ join department d
 select * from employee  where empno =1003; 
 select  empno,empname,title_no,title_name,manager_no, manager_name,salary,deptno,deptname,floor
  from vw_full_employee;
+ 
+
+-- password 길이 확인하기 (단방향 해시함수를 이용해서 암호화할거임) 해시함수를 사용하면 길이에 상관없이 41바이트로 돌려준다.
+-- 해시함수이기때문에 단방향함수이다.  결과값은 동일하지만 찾아가기가힘들다 그래서 많이쓴다. 좀더 좋은방법도있겠지만 이건 옛날방법이당. 
+-- (Hash :MD5)이다 .
+-- 비교는 어떻게??
+select password('aaa'),length (password('aaaaaaaaa'))  from dual; -- aaa라는 글자를 패스워드로 암호화해서 보여달라
+
+ -- 비교는 어떻게?? 외부에서 던져주면 여기에서 비교해서 
+ select  password('1234')

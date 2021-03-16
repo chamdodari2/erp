@@ -17,4 +17,14 @@ INSERT INTO EMPLOYEE VALUES(1003, '조민희', 3, 4377, 3000000, 2);
 INSERT INTO EMPLOYEE VALUES(2106, '김창섭', 4, 1003, 2500000, 2);
 INSERT INTO EMPLOYEE VALUES(1365, '김상원', 5, 3426, 1500000, 1);
 
-select * from employee;
+select * from emp_detail ;
+
+
+create or replace view vw_full_employee
+as 
+select e.empno, e.empname, t.tno as title_no , t.tname as title_name, e.manager as manager_no,
+      m.empname as manager_name, e. salary, d.deptno ,d.deptname,d.floor 
+   from employee e
+      join title t on e.title = t.tno 
+      left join employee m on e.manager = m.empno 
+      join department d on e.dept = d.deptno ;

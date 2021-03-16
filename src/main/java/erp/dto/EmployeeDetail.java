@@ -7,6 +7,7 @@ public class EmployeeDetail {
 	private int empNo;
 	private boolean gender;
 	private Date hireDate;
+	private String pass;
 	private byte[] pic;
 	
 	public EmployeeDetail(int empNo) {
@@ -18,6 +19,14 @@ public class EmployeeDetail {
 		this.gender = gender;
 		this.hireDate = hireDate;
 		this.pic = pic;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public int getEmpNo() {

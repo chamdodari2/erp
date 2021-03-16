@@ -17,6 +17,7 @@ import erp.dto.Title;
 import erp.service.EmployeeService;
 import erp.ui.content.EmployeePanel;
 import erp.ui.list.EmployeeTablePanel;
+import erp.ui.content.EmployeeDetailPanel;
 
 @SuppressWarnings("serial")
 public class TestFrame extends JFrame implements ActionListener {
@@ -27,6 +28,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	private JButton btnSet;
 	private JButton btnCancel;
 	private EmployeeTablePanel pList;
+	private EmployeeDetailPanel panel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,7 +49,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 408);
+		setBounds(100, 100, 577, 1024);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,6 +80,9 @@ public class TestFrame extends JFrame implements ActionListener {
 		pList.setService(service);
 		pList.loadData();
 		contentPane.add(pList);
+		
+		panel = new EmployeeDetailPanel();
+		contentPane.add(panel);
 	}
 
 	public void actionPerformed(ActionEvent e) {

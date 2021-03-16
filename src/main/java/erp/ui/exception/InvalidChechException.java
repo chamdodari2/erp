@@ -11,6 +11,11 @@ public class InvalidChechException extends RuntimeException { //전파. 계속 �
 		super("공백이 존재합니다.",cause);
 		
 	}
+
+	public InvalidChechException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
 	
 
 }
