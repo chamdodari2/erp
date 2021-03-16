@@ -101,8 +101,8 @@ public class TestFrame extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-	protected void actionPerformedBtnAdd(ActionEvent e) {
-		Employee emp = pEmpItem.getItem();
+	protected void actionPerformedBtnAdd(ActionEvent e) {  //추가버튼을 누르면 
+		Employee emp = pEmpItem.getItem();				   //(pEmpItem은 EmployeePanel모프) -> 
 		String message = String.format(
 				"empNo %d%n"
 				+ "empName %s%n"

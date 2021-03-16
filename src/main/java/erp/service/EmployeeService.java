@@ -20,7 +20,7 @@ public class EmployeeService {
 	
 	//부서목록을 가져오기
 	public  List<Department> showDeptList(){
-		return deptDao.selectDepartmentByAll();
+		return deptDao.selectDepartmentByAll();   //deptDao에 있는 메소드  selectDepartmentByAll 호출 ----> 부서테이블의 모든것 출력
 	}
 	 ///1 직책목록 가져오기
 	private TitleDao titleDao =  TitleDaoImpl.getInstance();
