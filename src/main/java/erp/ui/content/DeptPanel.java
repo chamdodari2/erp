@@ -23,7 +23,7 @@ public class DeptPanel extends AbstractContentPanel<Department> {
 	}
 	
 	
-	public void initialize() {
+	private void initialize() {
 		
 		
 		

@@ -61,7 +61,7 @@ public class EmployeePanel extends AbstractContentPanel<Employee> implements Ite
 		cmbTitle.setSelectedIndex(-1);
 	}
 
-	public void initialize() {
+	private void initialize() {
 		setBorder(new TitledBorder(null, "사원 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));
 		
