@@ -31,7 +31,7 @@ dependencies {
 jar {
     version = 1.0
     mainClassName= 'erp.Main'
-    baseName= 'Erp'
+    baseName= 'Main'
     appendix = 'bin'
     
     manifest{

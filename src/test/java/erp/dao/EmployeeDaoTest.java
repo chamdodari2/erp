@@ -15,7 +15,7 @@ import erp.dto.Employee;
 import erp.dto.Title;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeDaoTest {
-	private static EmployeeDao dao = EmployeeDaoImpl.getInstance();
+	private EmployeeDao dao = EmployeeDaoImpl.getInstance();
 
 	@After
 	public void tearDown() throws Exception {
@@ -53,7 +53,7 @@ public class EmployeeDaoTest {
 		Employee newEmployee = new Employee(1004,"천사",new Title(5),new Employee(4377),2000000, new Department(4));
 		int res = dao.insertEmployee(newEmployee);
 		Assert.assertEquals(1, res);
-		System.out.println(dao.selectEmployeeByNo(newEmployee));
+		dao.selectEmployeeByAll().stream().forEach(System.out::println);
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class EmployeeDaoTest {
 	public void test05DeleteEmployee() {
 		System.out.printf("%s()%n","testDeleteEmployee");
 		Employee newEmployee = new Employee(1004);
-		int res = EmployeeDao.deleteEmployee(newEmployee);
+		int res = dao.deleteEmployee(newEmployee);
 		Assert.assertEquals(1, res);
 		dao.selectEmployeeByAll().stream().forEach(System.out::println);
 	}
@@ -77,14 +77,14 @@ public class EmployeeDaoTest {
 	public void test06SelectEmployeeByTitle() {
 		System.out.printf("%s()%n","test06SelectEmployeeByTitle");
 		List<Employee> res  = dao.SelectEmployeeByTitle(new Title(3));
-		Assert.assertEquals(1, res);//
+		Assert.assertNotNull(res);//
 		dao.selectEmployeeByAll().stream().forEach(System.out::println);
 	}
 	@Test
 	public void test07SelectEmployeeByDepartment() {
 		System.out.printf("%s()%n","test07SelectEmployeeByDepartment");
 		List<Employee> res  = dao.SelectEmployeeByDepartment(new Department(3));
-		Assert.assertEquals(1, res);//
+		Assert.assertNotNull(res);//
 		dao.selectEmployeeByAll().stream().forEach(System.out::println);
 	}
 	

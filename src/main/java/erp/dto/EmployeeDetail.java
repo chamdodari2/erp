@@ -14,6 +14,13 @@ public class EmployeeDetail {
 		this.empNo = empNo;
 	}
 
+	public EmployeeDetail(int empNo, boolean gender, Date hireDate, byte[] pic) {
+		this.empNo = empNo;
+		this.gender = gender;
+		this.hireDate = hireDate;
+		this.pic = pic;
+	}
+
 	public EmployeeDetail(int empNo, boolean gender, Date hireDate, String pass, byte[] pic) {
 		this.empNo = empNo;
 		this.gender = gender;

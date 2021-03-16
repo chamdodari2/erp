@@ -15,10 +15,7 @@ public interface EmployeeDao { //인터페이스 선언
 	
 	int insertEmployee(Employee employee);  // 반환타입 : int 매개변수를 받아서 검색한다
 	int updateEmployee(Employee employee);
-	static int deleteEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return 0;
-	} //int에서 변경
+	int deleteEmployee(Employee employee);
 	
 
 	List<Employee> SelectEmployeeByTitle(Title title);

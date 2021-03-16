@@ -16,6 +16,7 @@ import erp.dto.Title;
 
 public class EmployeeService {
 	private DepartmentDao deptDao =  DepartmentDaoImpl.getInstance();
+	private EmployeeDao empDao = EmployeeDaoImpl.getInstance();
 	
 	//부서목록을 가져오기
 	public  List<Department> showDeptList(){
@@ -27,7 +28,6 @@ public class EmployeeService {
 		return  titleDao.selectTitleByAll();
 	}
 	
-	private EmployeeDao empDao = EmployeeDaoImpl.getInstance();
 	public List<Employee> SelectEmployeeByDepartment(Department department) {
 		return empDao.SelectEmployeeByDepartment(department);
 		}
@@ -40,7 +40,7 @@ public class EmployeeService {
 	}
 	
 	public void removeEmployee(Employee employee) {
-		EmployeeDao.deleteEmployee(employee);
+		empDao.deleteEmployee(employee);
 	}
 	public void modifyEmployee(Employee employee) {
 		empDao.updateEmployee(employee);

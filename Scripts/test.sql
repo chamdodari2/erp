@@ -79,7 +79,15 @@ insert into emp_detail(empno, pic , gender, hiredate, pass)
 values(?, ?, ?, ?, ?);
 
 select * from emp_detail;
-
-
+-- 
+select empno, pic, gender, hiredate, pass  from emp_detail where empno = 1003;
 
 delete * from emp_detail where empno = 1003;
+
+
+-- 
+update  emp_detail set empno = ?, pic = ?, gender = ?, hiredate = ?, pass = ?
+
+
+select  * from employee ;
+delete from employee where empno= 1004;

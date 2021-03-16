@@ -16,12 +16,12 @@ import erp.ui.exception.SqlConstraintException;
 
 public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하는  EmployeeDaoImpl 클래스 선언
 
-	private static final EmployeeDaoImpl instance = new EmployeeDaoImpl();  //상수 선언. EmployeeDaoImpl 객체생성.  타입의   참조변수 instance 선언
+	private static EmployeeDaoImpl instance = new EmployeeDaoImpl();  //상수 선언. EmployeeDaoImpl 객체생성.  타입의   참조변수 instance 선언
 
 	public static EmployeeDaoImpl getInstance() {	// 반환타입 EmployeeDaoImpl인  getInstance메소드 선언. 결과값 : 참조변수인 instance
-//		if (instance == null) {
-//			instance = new EmployeeDaoImpl();
-//		}
+		if (instance == null) {
+			instance = new EmployeeDaoImpl();
+		}
 		return instance;      //싱글턴패턴은 이게 다다.
 
 	}
@@ -65,13 +65,19 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 //		empno,emp_name,title_no,title_name,manager,mgr_name,salary,dept_no,dept_name,floor
 		int empno = rs.getInt("empno");
 		String empname = rs.getString("empname");
-		Title title = new Title(rs.getInt("title_no"));
-		Employee manager = new Employee(rs.getInt("manager_no"));
-		int salary = rs.getInt("salary");		
-		Department dept = new Department(rs.getInt("deptno"));
-		//존재할 경우 찍어주기. if끼리 따로 빼기
 		
-
+		Title title = null;
+		Employee manager = null;
+		int salary = 0;
+		Department dept = null;
+		
+		try {
+		title = new Title(rs.getInt("title_no"));
+		manager = new Employee(rs.getInt("manager_no"));
+		salary = rs.getInt("salary");		
+		 dept = new Department(rs.getInt("deptno"));
+		//존재할 경우 찍어주기. if끼리 따로 빼기
+		}catch (SQLException e) {	}
 			try {
 			title.settName(rs.getNString("title_name"));
 		}catch(SQLException e) {}		
@@ -179,6 +185,7 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 		return 0;
 	}
 
+	@Override
 	public int deleteEmployee(Employee employee) { // 삭제
 		String sql = "delete from employee where empno = ?";
 		try (Connection con = JdbcConn.getConnection(); 
@@ -207,7 +214,7 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 				if (rs.next()) {				
 					List<Employee> list = new ArrayList<>();
 					do {					
-						list.add((new Employee(rs.getInt("empno"),rs.getString("empname"))));
+						list.add(getEmployee(rs));
 					}while (rs.next());					
 					return  list; 
 				}
@@ -232,7 +239,7 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 				if (rs.next()) {				
 					List<Employee> list = new ArrayList<>();
 					do {
-						list.add((new Employee(rs.getInt("empno"),rs.getString("empname"))));
+						list.add(getEmployee(rs));
 					}while (rs.next());					
 					return  list; 
 				}

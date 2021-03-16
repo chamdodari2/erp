@@ -13,7 +13,7 @@ public class JdbcConnTest {
 		System.out.printf("%s()%n","testGetConnection");
 		Connection con = JdbcConn.getConnection();
 		System.out.println("con >" + con);
-		Assert.assertNull(con);
+		Assert.assertNotNull(con);   ///여기 주의!
 	}
 
 }
