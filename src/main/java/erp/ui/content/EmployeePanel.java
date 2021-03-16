@@ -27,7 +27,7 @@ import erp.service.TitleService;
 import erp.ui.exception.InvalidChechException;
 
 @SuppressWarnings("serial")
-public class EmployeePanel extends InterFaceItem<Employee> implements ItemListener{  //제네릭을 안쓰면 스트링이 들어가서 직책 콤보박스 선택시 목록이 나오는데, 해당 클래스를 생성해서 출력해야하기때문에 제네릭을 쓰는게 좋다.
+public class EmployeePanel extends AbstractContentPanel<Employee> implements ItemListener{  //제네릭을 안쓰면 스트링이 들어가서 직책 콤보박스 선택시 목록이 나오는데, 해당 클래스를 생성해서 출력해야하기때문에 제네릭을 쓰는게 좋다.
 	private JTextField tfNo;
 	private JTextField tfName;
 	private JComboBox<Title> cmbTitle;

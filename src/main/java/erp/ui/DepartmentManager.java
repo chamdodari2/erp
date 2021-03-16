@@ -20,7 +20,7 @@ import erp.dto.Department;
 import erp.dto.Employee;
 import erp.service.DepartmentService;
 import erp.ui.content.DeptPanel;
-import erp.ui.content.InterFaceItem;
+import erp.ui.content.AbstractContentPanel;
 import erp.ui.exception.InvalidChechException;
 import erp.ui.exception.NotSelectedException;
 import erp.ui.exception.SqlConstraintException;
@@ -30,7 +30,7 @@ import erp.ui.list.DepartmentTablePanel;
 public class DepartmentManager extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private InterFaceItem<Department> pContent;  //////////7. 이렇게 수정
+	private AbstractContentPanel<Department> pContent;  //////////7. 이렇게 수정
 	private JPanel pBtns;
 	private DepartmentTablePanel pList;
 	private JButton btnAdd;

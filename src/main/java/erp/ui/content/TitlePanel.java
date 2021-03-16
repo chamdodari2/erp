@@ -11,7 +11,7 @@ import erp.dto.Title;
 import erp.ui.exception.InvalidChechException;
 
 @SuppressWarnings("serial")
-public class TitlePanel extends InterFaceItem<Title> { // 6
+public class TitlePanel extends AbstractContentPanel<Title> { // 6
 	private JTextField tfNo;
 	private JTextField tfName;
 

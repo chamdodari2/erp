@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class DeptPanel extends InterFaceItem<Department> {
+public class DeptPanel extends AbstractContentPanel<Department> {
 	private JTextField tfDeptNo;
 	private JTextField tfDeptName;
 	private JTextField tfFloor;
@@ -22,7 +22,7 @@ public class DeptPanel extends InterFaceItem<Department> {
 		initialize();
 	}
 	
-	@Override
+	
 	public void initialize() {
 		
 		
