@@ -68,3 +68,18 @@ select password('aaa'),length (password('aaaaaaaaa'))  from dual; -- aaa라는 �
 
  -- 비교는 어떻게?? 외부에서 던져주면 여기에서 비교해서 
  select  password('1234')
+ 
+ -- 
+insert into emp_detail(empno,pic,gender,hiredate,pass 
+values(?,?,?,?, password(?)));
+
+
+-- emp_detail insert
+insert into emp_detail(empno, pic , gender, hiredate, pass)
+values(?, ?, ?, ?, ?);
+
+select * from emp_detail;
+
+
+
+delete * from emp_detail where empno = 1003;
