@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import erp.ui.DepartmentManager;
+import erp.ui.EmployeeManagerUI;
 import erp.ui.TitleManager;
+import erp.ui.TitleManagerUI;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ public class Main extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnTitle;
 	private JButton btnDepartment;
+	private JButton btnEmployee;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,11 +59,15 @@ public class Main extends JFrame implements ActionListener {
 		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 
-		JButton btnEmployee = new JButton("사원 관리");
+		btnEmployee = new JButton("사원 관리");
+		btnEmployee.addActionListener(this);
 		contentPane.add(btnEmployee);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmployee) {
+			actionPerformedBtnEmployee(e);
+		}
 		if (e.getSource() == btnDepartment) {
 			actionPerformedBtnDepartment(e);
 		}
@@ -70,11 +77,18 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnTitle(ActionEvent e) {
-		TitleManager frame = new TitleManager();
+		TitleManagerUI frame = new TitleManagerUI();
+		frame.setTitle("직책관리");//
 		frame.setVisible(true);
 	}
 	protected void actionPerformedBtnDepartment(ActionEvent e) {
 		DepartmentManager frame = new DepartmentManager();
+		frame.setTitle("부서관리");//
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnEmployee(ActionEvent e) {
+		EmployeeManagerUI frame = new EmployeeManagerUI();
+		frame.setTitle("사원관리");//
 		frame.setVisible(true);
 	}
 }

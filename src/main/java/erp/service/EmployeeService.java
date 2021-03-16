@@ -39,9 +39,16 @@ public class EmployeeService {
 		return empDao.selectEmployeeByAll();
 	}
 	
+	public void removeEmployee(Employee employee) {
+		EmployeeDao.deleteEmployee(employee);
+	}
+	public void modifyEmployee(Employee employee) {
+		empDao.updateEmployee(employee);
+	}
+	public void addEmployee(Employee employee) {
+		empDao.insertEmployee(employee);
+	}
 	
-	
-
 	
 	
 }

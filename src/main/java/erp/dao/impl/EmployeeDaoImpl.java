@@ -12,6 +12,7 @@ import erp.dbcon.JdbcConn;
 import erp.dto.Department;
 import erp.dto.Employee;
 import erp.dto.Title;
+import erp.ui.exception.SqlConstraintException;
 
 public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하는  EmployeeDaoImpl 클래스 선언
 
@@ -149,11 +150,10 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 			pstmt.setInt(6, employee.getDept().getDeptNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SqlConstraintException(e.getMessage(),e);
+			
 		}
 
-		return 0;
 	}
 
 	@Override
@@ -179,7 +179,6 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 		return 0;
 	}
 
-	@Override
 	public int deleteEmployee(Employee employee) { // 삭제
 		String sql = "delete from employee where empno = ?";
 		try (Connection con = JdbcConn.getConnection(); 

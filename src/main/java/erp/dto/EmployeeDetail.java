@@ -3,17 +3,17 @@ package erp.dto;
 import java.util.Arrays;
 import java.util.Date;
 
-public class empDetail {
+public class EmployeeDetail {
 	private int empNo;
 	private boolean gender;
 	private Date hireDate;
 	private byte[] pic;
 	
-	public empDetail(int empNo) {
+	public EmployeeDetail(int empNo) {
 		this.empNo = empNo;
 	}
 
-	public empDetail(int empNo, boolean gender, Date hireDate, byte[] pic) {
+	public EmployeeDetail(int empNo, boolean gender, Date hireDate, byte[] pic) {
 		this.empNo = empNo;
 		this.gender = gender;
 		this.hireDate = hireDate;

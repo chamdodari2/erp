@@ -50,7 +50,7 @@ public class TitleManager extends JFrame implements ActionListener {
 	}
 	
 	private void setService() {
-		// TODO Auto-generated method stub
+		service = new TitleService();
 		
 	}
 
