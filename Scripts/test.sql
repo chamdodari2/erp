@@ -60,6 +60,8 @@ select  empno,empname,title_no,title_name,manager_no, manager_name,salary,deptno
  from vw_full_employee;
  
 
+
+select * from emp_detail  where empno =1003;
 -- password 길이 확인하기 (단방향 해시함수를 이용해서 암호화할거임) 해시함수를 사용하면 길이에 상관없이 41바이트로 돌려준다.
 -- 해시함수이기때문에 단방향함수이다.  결과값은 동일하지만 찾아가기가힘들다 그래서 많이쓴다. 좀더 좋은방법도있겠지만 이건 옛날방법이당. 
 -- (Hash :MD5)이다 .
@@ -91,3 +93,8 @@ update  emp_detail set empno = ?, pic = ?, gender = ?, hiredate = ?, pass = ?
 
 select  * from employee ;
 delete from employee where empno= 1004;
+
+
+
+-- 
+select password('aaa'),length (password('aaaaaaaaa'))  from dual; 

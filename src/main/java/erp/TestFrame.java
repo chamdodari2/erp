@@ -13,11 +13,13 @@ import javax.swing.border.EmptyBorder;
 
 import erp.dto.Department;
 import erp.dto.Employee;
+import erp.dto.EmployeeDetail;
 import erp.dto.Title;
+import erp.service.EmployeeDetailService;
 import erp.service.EmployeeService;
+import erp.ui.content.EmployeeDetailPanel;
 import erp.ui.content.EmployeePanel;
 import erp.ui.list.EmployeeTablePanel;
-import erp.ui.content.EmployeeDetailPanel;
 
 @SuppressWarnings("serial")
 public class TestFrame extends JFrame implements ActionListener {
@@ -29,6 +31,9 @@ public class TestFrame extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private EmployeeTablePanel pList;
 	private EmployeeDetailPanel panel;
+	private JPanel panel_1;
+	private JButton btnGet;
+	private JButton btnSet2;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -82,10 +87,31 @@ public class TestFrame extends JFrame implements ActionListener {
 		contentPane.add(pList);
 		
 		panel = new EmployeeDetailPanel();
+		panel.setTfEmpno(new Employee(1003)); ///////////////해줘야 사원번호 들어간다. 아니면 공백에러뜬다!!    ---> 원래는 객체안넣어줘도됐음. 
 		contentPane.add(panel);
+		
+		panel_1 = new JPanel();
+		contentPane.add(panel_1);
+		
+		btnGet = new JButton("가져오기");
+		btnGet.addActionListener(this);
+		panel_1.add(btnGet);
+		
+		btnSet2 = new JButton("불러오기");
+		btnSet2.addActionListener(this);
+		panel_1.add(btnSet2);
 	}
+//	public void setTfEmpno(int empNo) {
+	//	tfEmpNo.setText(String.valueOf(empNo));/////////////////////////////////////이거 어디에있어야???
+	//}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSet2) {
+			actionPerformedBtnSet2(e);
+		}
+		if (e.getSource() == btnGet) {
+			actionPerformedBtnGet(e);
+		}
 		try {
 			if (e.getSource() == btnCancel) {
 				actionPerformedBtnCancel(e);
@@ -131,6 +157,21 @@ public class TestFrame extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pEmpItem.clearTf();
+	}
+	
+	
+	protected void actionPerformedBtnGet(ActionEvent e) {  //가져오기 버튼 눌렀을때 작동
+	EmployeeDetail employeeDetail = panel.getItem();
+	JOptionPane.showMessageDialog(null,employeeDetail);
+			
+			//	panel.settfEmpno(1003); 이거 어디에 넣어야할지? 소문자 대문자?? 수정? 
+		
+	}
+	protected void actionPerformedBtnSet2(ActionEvent e) {  //불러오기 누르면
+		EmployeeDetailService service = new EmployeeDetailService();
+		EmployeeDetail empDetail = service.selectEmployeeDetailByEmpNo (new Employee(1003));
+		System.out.println(empDetail);
+		panel.setItem(empDetail);
 	}
 }
 

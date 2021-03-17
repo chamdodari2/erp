@@ -4,14 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
-import javax.swing.AbstractButton;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
@@ -29,6 +34,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JDateChooser;
 
+import erp.dto.Employee;
 import erp.dto.EmployeeDetail;
 import erp.ui.exception.InvalidChechException;
 
@@ -37,7 +43,7 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> im
 	private JPasswordField pfPass1;
 	private JPasswordField pfPass2;
 	
-	private String imgPath = System.getProperty("user.dir")+File.separator + "images" + File.separator;
+	private String imgPath = System.getProperty("user.dir")+File.separator + "images" + File.separator;  //스트링타입으로 접근주소 입력. 
 	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -97,6 +103,16 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> im
 		pItem.add(pContent);
 		pContent.setLayout(new GridLayout(0, 2, 10, 0));
 		
+		JLabel lblEmpNo = new JLabel("사원번호");
+		lblEmpNo.setHorizontalAlignment(SwingConstants.RIGHT);
+		pContent.add(lblEmpNo);
+		
+		tfEmpNo = new JTextField();
+		tfEmpNo.setEditable(false);
+		tfEmpNo.setHorizontalAlignment(SwingConstants.TRAILING);
+		pContent.add(tfEmpNo);
+		tfEmpNo.setColumns(10);
+		
 		JLabel lblHireDate = new JLabel("입사일");
 		lblHireDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		pContent.add(lblHireDate);
@@ -145,19 +161,68 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> im
 		lblPassConfirm.setForeground(Color.RED);
 		lblPassConfirm.setBackground(Color.RED);
 		pContent.add(lblPassConfirm);
+		
+		
+		
+		
 	}
+	//////////////////
+	public void setTfEmpno(Employee empNo) {  //원래 int만 적어주고, 밑에 괄호에는 empNo만 적어줬었는데 객체로 바꾼거임
+		tfEmpNo.setText(String.valueOf(empNo.getEmpNo()));/////////////////////////////////////이거 어디에있어야???
+	}
+	
 	@Override
 	public void setItem(EmployeeDetail item) {
-		// TODO Auto-generated method stub
 		
+		tfEmpNo.setText(String.valueOf(item.getEmpNo()));
+		byte[] iconBytes = item.getPic();
+		ImageIcon icon = new ImageIcon(iconBytes);
+		lblPic.setIcon(icon);
+		dateHire.setDate(item.getHireDate());
+		if(item.isGender()) {
+			rdbtnFemale.setSelected(true);;
+			
+		}else {
+			rdbtnMale.setSelected(true);
+		}
+	////////////////////////////////////////////////////////////////////	
 	}
 
 	@Override
 	public EmployeeDetail getItem() {
-		// TODO Auto-generated method stub
-		return null;
+		validCheck();
+		int empNo = Integer.parseInt(tfEmpNo.getText());
+		boolean gender = rdbtnFemale.isSelected()?true:false;
+		Date hireDate = dateHire.getDate();
+		
+//		if(!lblPassConfirm.getText().equals("불일치")) {   //패스워드 확인시 불일치하면 패스워드 불일치 에외처리 던져줌	
+//		throw new InvalidChechException("패스워드 불일치");
+//		
+//		}
+		String pass = String.valueOf(pfPass1.getPassword());   //비밀번호 입력
+		byte[] pic = getImage();  //라는 메소드를 사용해서 이미지를 가져올거임
+		return new EmployeeDetail(empNo,gender,hireDate,pass,pic);
 	}
 
+	private byte[] getImage() {  											//이미지를 가져오기 위한 메소드
+						//이렇게하면 형변환 안하면 아이콘이 들어오는데, 이미지아이콘으로 형변환한다.
+		try(ByteArrayOutputStream baos = new ByteArrayOutputStream()){  
+			ImageIcon icon = (ImageIcon) lblPic.getIcon();  
+			BufferedImage bi = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_BGR);
+			
+			//icon -> image
+			Graphics2D g2 = bi.createGraphics();  //여기서 읽어와서 이미지를 만들겠다.
+			g2.drawImage(icon.getImage(),0,0,null);
+			g2.dispose();
+			
+			ImageIO.write(bi, "png", baos);  //baos에다가 출력해달라
+			return baos.toByteArray(); //레이블에 있는 이미지를 byte배열 만들어서  던져달라
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public void validCheck() {
 		if (!lblPassConfirm.getText().equals("일치")) {
@@ -222,5 +287,6 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> im
 		}
 	};
 	private JLabel lblPassConfirm;
+	private JTextField tfEmpNo;
 }
 
