@@ -26,6 +26,8 @@ public class EmployeeDetailUI extends JFrame implements ActionListener {
 	private EmployeeDetailService service;
 	private JButton btnCancel;
 	private JButton btnDel;
+	private JButton btnUpdate;
+	private boolean inBtns;
 
 	public EmployeeDetailUI(boolean isBtns, EmployeeDetailService service) {
 		this.service = service;
@@ -43,22 +45,36 @@ public class EmployeeDetailUI extends JFrame implements ActionListener {
 		pItem = new EmployeeDetailPanel();
 		contentPane.add(pItem, BorderLayout.CENTER);
 
-		if (isBtns) { // isBtns가 true라면 보여지는것이다
+	//	if (isBtns) { // isBtns가 true라면 보여지는것이다
 			pBtns = new JPanel();//////////////
 			contentPane.add(pBtns, BorderLayout.SOUTH);
 
-			btnAdd = new JButton("추가");
+			btnAdd = new JButton();  //수정글자 지움
 			btnAdd.addActionListener(this);
 			pBtns.add(btnAdd);
 
-			btnCancel = new JButton("취소");
+			btnCancel = new JButton();   //삭제버튼? 지움
 			btnCancel.addActionListener(this);
 			pBtns.add(btnCancel);
-
 			
+			
+		pBtns = new JPanel();////////////////
+		if(inBtns) {/////////////////////////여기뭐 빠트렸는디
+			btnAdd.setText("추가");
+			btnCancel.setText("취소");
+		}
+		////////////////////////////////////////
+		if(inBtns) {/////////////////////////여기두 빠트렸는디
+			btnAdd.setText("추가");
+			btnCancel.setText("취소");
+		//}
 		} else {
-			pBtns = new JPanel();
+		//	pBtns = new JPanel();////////////////
 			contentPane.add(pBtns, BorderLayout.SOUTH);
+			
+			btnUpdate = new JButton("수정");
+			btnUpdate.addActionListener(this);
+			pBtns.add(btnUpdate);
 			
 			btnDel = new JButton("삭제");
 			btnDel.addActionListener(this);
@@ -89,10 +105,10 @@ public class EmployeeDetailUI extends JFrame implements ActionListener {
 ////////////////////////////////////////////////////////////
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnDel) {
+		if (e.getActionCommand().contentEquals("삭제")) {
 			actionPerformedBtnDel(e);
 		}
-		if (e.getSource() == btnCancel) {
+		if (e.getActionCommand().contentEquals("취소")) {
 			actionPerformedBtnCancel(e);
 		}
 		if (e.getActionCommand().contentEquals("추가")) { // 겟소스로 하지말고

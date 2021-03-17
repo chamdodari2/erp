@@ -57,16 +57,23 @@ import erp.ui.list.EmployeeTablePanel;
 	//System.out.println(emp);
 	EmployeeDetail empDetail = detailService.selectEmployeeDetailByEmpNo(emp);
 	System.out.println(empDetail);
+	
 	//나중에 처리
+	EmployeeDetailUI frame;
 	if(empDetail ==null) {
-		JOptionPane.showMessageDialog(null,"세부정보 없음");
-		return;
+		frame = new EmployeeDetailUI(true, detailService); // 유무에 따라서 추가하거나 빼거나하는 버튼 보이게,안보이게
+	}else {
+		frame = new EmployeeDetailUI(false, detailService); // 유무에 따라서 추가하거나 빼거나하는 버튼 보이게,안보이게
+		frame.setDetailItem(empDetail); 
+	//	JOptionPane.showMessageDialog(null,"세부정보 없음");
+//		return;
 	}
 	//EmployeeDetailService service = new EmployeeDetailService();  이제 필요없다  걍서비스에서 디테일서비스로 바꿔줘서
-	EmployeeDetailUI frame = new EmployeeDetailUI(false, detailService); // 유무에 따라서 추가하거나 빼거나하는 버튼 보이게,안보이게
-	frame.setEmpNo(emp);
-	frame.setDetailItem(empDetail);  //이거도 추가쓰
+//	 frame = new EmployeeDetailUI(false, detailService); // 유무에 따라서 추가하거나 빼거나하는 버튼 보이게,안보이게
+	
+//	frame.setDetailItem(empDetail);  //이거도 추가쓰
 	//frame.setEmpNo(new Employee(2106)); // 이친구 정보를 기본으로 넣어놓기 이거대신 이제 위에한줄
+	frame.setEmpNo(emp);
 	frame.setVisible(true);
 	
 	/*JFrame subFrame = new JFrame("사원 세부 정보");
