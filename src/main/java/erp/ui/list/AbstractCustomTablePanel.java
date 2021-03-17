@@ -27,14 +27,14 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		initialize();
 	}
 
-	public T getItem() {  //선택이 안되면 마이너스1을 리턴한다
+	public abstract T getItem(); /*{  //선택이 안되면 마이너스1을 리턴한다
 		int idx = table.getSelectedRow();
 		if(idx == -1 ) {
 			throw
 			new NotSelectedException();
 		}
 		return list.get(idx);
-	}
+	}*/
 	
 	
 	public void loadData() {

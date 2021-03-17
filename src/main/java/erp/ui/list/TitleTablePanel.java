@@ -11,6 +11,7 @@ import javax.swing.table.TableColumnModel;
 
 import erp.dto.Title;
 import erp.service.TitleService;
+import erp.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
 public class TitleTablePanel extends AbstractCustomTablePanel<Title> {//부모클래스를 Title 타입으로 상속받아서
@@ -75,7 +76,16 @@ public class TitleTablePanel extends AbstractCustomTablePanel<Title> {//부모�
 	public void setService(TitleService service) {
 		this.service = service;
 	}
-	
+
+	@Override
+	public Title getItem() {
+		int row = table.getSelectedRow();
+		int titleNo = (int)table.getValueAt(row, 0); //테이블의 제일 앞에있는거 가져오기	
+		if(row == -1 ) {
+			throw new NotSelectedException();
+		}
+		return list.get(list.indexOf(new Title(titleNo))); //이거에 일치하는 인덱스번호를 넘겨준다
+	}
 
 	
 }

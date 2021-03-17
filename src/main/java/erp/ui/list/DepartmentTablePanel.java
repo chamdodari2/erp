@@ -12,8 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import erp.dto.Department;
+import erp.dto.Title;
 import erp.service.DepartmentService;
 import erp.service.TitleService;
+import erp.ui.exception.NotSelectedException;
 
 	@SuppressWarnings("serial")
 public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
@@ -52,4 +54,16 @@ public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
 		public String[] getColumnNames() {
 			return new String[] { "부서번호", "부서명","위치" };
 		}
+
+		@Override
+		public Department getItem() {
+			int row = table.getSelectedRow();
+			int deptNo = (int)table.getValueAt(row, 0); //테이블의 제일 앞에있는거 가져오기	
+			if(row == -1 ) {
+				throw new NotSelectedException();
+			}
+			//return list.get(list.indexOf(new Title(titleNo)));
+			return list.get(list.indexOf(new Department(deptNo))); //이거에 일치하는 인덱스번호를 넘겨준다
+		}
+
 	}
