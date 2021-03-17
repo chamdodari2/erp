@@ -1,29 +1,34 @@
 package erp.ui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import erp.dto.Employee;
+import erp.dto.EmployeeDetail;
+import erp.service.EmployeeDetailService;
 import erp.service.EmployeeService;
 import erp.ui.content.AbstractContentPanel;
+import erp.ui.content.EmployeeDetailPanel;
 import erp.ui.content.EmployeePanel;
 import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
 
 	public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 	private EmployeeService service;
-	
+	private EmployeeDetailService detailService;
 	public EmployeeManagerUI() {
-	
 			empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);
 		}
 		
 	
 
 	@Override
-	protected void setService() {
-		service = new EmployeeService();
+	protected void setService() {  //////////위에서 선언하면 여기서 객체생성 해줘야한당
+	service = new EmployeeService();
+	detailService = new EmployeeDetailService(); 
 		
 	}
 
@@ -48,7 +53,25 @@ import erp.ui.list.EmployeeTablePanel;
 
 	@Override   //메뉴구분
 	protected void actionPerformedMenuGubun() {
-	throw new UnsupportedOperationException("제공되지 않음");
+	Employee emp = pList.getItem();
+	//System.out.println(emp);
+	EmployeeDetail empDetail = detailService.selectEmployeeDetailByEmpNo(emp);
+	System.out.println(empDetail);
+	//나중에 처리
+	if(empDetail ==null) {
+		JOptionPane.showMessageDialog(null,"세부정보 없음");
+		return;
+	}
+	
+	JFrame subFrame = new JFrame("사원 세부 정보");
+	subFrame.setBounds(this.getWidth(), this.getHeight(),450,500);
+	EmployeeDetailPanel subDetailPanel = new EmployeeDetailPanel();
+	subDetailPanel.setItem(empDetail);
+	
+	subFrame.add(subDetailPanel,BorderLayout.CENTER); 
+	
+	subFrame.setVisible(true);
+	//throw new UnsupportedOperationException("제공되지 않음");
 		
 	}
 

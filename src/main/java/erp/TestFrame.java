@@ -91,6 +91,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		contentPane.add(panel);
 		
 		panel_1 = new JPanel();
+		panel.setTfEmpno(new Employee(1003));
 		contentPane.add(panel_1);
 		
 		btnGet = new JButton("가져오기");

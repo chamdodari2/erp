@@ -77,7 +77,7 @@ public class EmployeeDetailDaoTest {
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.getTime();
 		
-		EmployeeDetail employeeDetail = new EmployeeDetail(1003, false, cal.getTime(), "1234", getImage("노이미지.jpg"));
+		EmployeeDetail employeeDetail = new EmployeeDetail(1003, false, cal.getTime(), "1234", getImage("박보영.jpg"));
 		int res = dao.updateEmployeeDetail(employeeDetail);
 		
 		Assert.assertEquals(1, res);
