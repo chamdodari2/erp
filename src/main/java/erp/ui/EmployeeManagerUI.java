@@ -16,41 +16,45 @@ import erp.ui.content.EmployeePanel;
 import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
 
-	public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
-	private EmployeeService service;
-	private EmployeeDetailService detailService;
-	public EmployeeManagerUI() {
-			empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);
+	@SuppressWarnings("serial")
+	public class EmployeeManagerUI extends AbstractManagerUI<Employee> {  //AbstractManagerUI<Employee> 상속받음
+	private EmployeeService service;									  //EmployeeService 객체생성
+	private EmployeeDetailService detailService;						  //EmployeeDatailService 객체생성
+	public EmployeeManagerUI() {										  //EmployeeManagerUI 생성자
+			empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);				// 부모UI에서 정의된 메소드 사용 -> empListByTitleItem.settext(EMP_MENU사용)
 		}
 		
 	
-
-	@Override
-	protected void setService() {  //////////위에서 선언하면 여기서 객체생성 해줘야한당
+	//메소드 오버라이드 1   -------->    	1. setService (사용할 Service 객체화 )
+	@Override		//
+	protected void setService() {  //////////위에서 선언하면 여기서 객체생성 해줘야한다.
 	service = new EmployeeService();
 	detailService = new EmployeeDetailService(); 
 		
 	}
-
+	
+	
+	//메소드 오버라이드 2				--------> 2.tableLoadData (사용할 tableLoadData 설정)  사원리스트 출력하기
 	@Override
-	protected void tableLoadData() {
-		((EmployeeTablePanel) pList).setService(service);   //TitleTablePanel로 감싸주었음 안감싸주면 안먹는다
-		pList.loadData();
+	protected void tableLoadData() {   ///// 읽어올 데이터 설정
+		((EmployeeTablePanel) pList).setService(service);       //EmployeeTablePanel로 형변환한 pList(얘는 또 custum)에 service를 매개변수로 넣음                                    //TitleTablePanel로 감싸주었음 안감싸주면 안먹는다
+		pList.loadData();  //EmployeeService
 	}
-
-	@Override
-	protected AbstractContentPanel<Employee> createContentPanel() {
-		EmployeePanel empPanel = new EmployeePanel();
-		empPanel.setService(service);	
+	//메소드 오버라이드3				----------->
+	@Override					  
+	protected AbstractContentPanel<Employee> createContentPanel()   {  
+		EmployeePanel empPanel = new EmployeePanel();					//empPanel 패널에 EmployeePanel 모프
+		empPanel.setService(service);									//empPanel에 EmployeeService
 		return empPanel;
 	}
-
-	@Override  //테이블
+	//메소드 오버라이드4
+	@Override  
 	protected AbstractCustomTablePanel<Employee> createTablePanel() {
 		// TODO Auto-generated method stub
 		return new EmployeeTablePanel();
 	}
-
+	
+	//메소드 오버라이드5
 	@Override   //메뉴구분
 	protected void actionPerformedMenuGubun() {
 	Employee emp = pList.getItem();
@@ -87,7 +91,9 @@ import erp.ui.list.EmployeeTablePanel;
 	//throw new UnsupportedOperationException("제공되지 않음");
 	*/	
 	}
-
+	
+	
+	//메소드 오버라이드 6
 	@Override  //메뉴업데이트
 	protected void actionPerformedMenuUpdate() {
 		Employee updateEmp = pList.getItem();

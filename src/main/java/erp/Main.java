@@ -24,9 +24,9 @@ public class Main extends JFrame implements ActionListener {
 	private JButton btnTitle;
 	private JButton btnDepartment;
 	private JButton btnEmployee;
-	private TitleManagerUI titleFrame;
-	private DepartmentManager deptFrame;
-	private EmployeeManagerUI empFrame;
+	private TitleManagerUI titleFrame;								//TitleManagerUI 모프
+	private DepartmentManager deptFrame;							//DepartmentUI 모프
+	private EmployeeManagerUI empFrame;								//EmployeeManagerUI 모프
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -75,7 +75,7 @@ public class Main extends JFrame implements ActionListener {
 		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 
-		btnEmployee = new JButton("사원 관리");
+		btnEmployee = new JButton("사원 관리");     // 액션퍼폼드 안에 있던거 다 일로 옮겨주고 필드변수로 선언함
 		btnEmployee.addActionListener(this);
 		contentPane.add(btnEmployee);
 	}
@@ -92,17 +92,17 @@ public class Main extends JFrame implements ActionListener {
 		}
 	}
 
-	protected void actionPerformedBtnTitle(ActionEvent e) {
+	protected void actionPerformedBtnTitle(ActionEvent e) {  				//직책관리 버튼
 
 		titleFrame.setVisible(true);
 	}
 
-	protected void actionPerformedBtnDepartment(ActionEvent e) {
+	protected void actionPerformedBtnDepartment(ActionEvent e) {			//부서관리 버튼
 
 		deptFrame.setVisible(true);
 	}
 
-	protected void actionPerformedBtnEmployee(ActionEvent e) {
+	protected void actionPerformedBtnEmployee(ActionEvent e) {				//사원관리 버튼
 		//
 		empFrame.setVisible(true);
 	}
