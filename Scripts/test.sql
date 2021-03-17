@@ -98,3 +98,7 @@ delete from employee where empno= 1004;
 
 -- 
 select password('aaa'),length (password('aaaaaaaaa'))  from dual; 
+
+-- 넣어준거 확인쓰
+select * from emp_detail;
+select * from employee ;
