@@ -19,6 +19,14 @@ public class TitleManagerUI extends AbstractManagerUI<Title> {
 
 	private TitleService service;  //TItleManager에서 복붙함
 	
+	
+	
+	
+
+		public TitleManagerUI() {
+			empListByTitleItem.setText(AbstractManagerUI.TITLE_MENU);
+		}
+		
 	@Override
 	protected void setService() {
 		service = new TitleService();

@@ -14,9 +14,14 @@ import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.DepartmentTablePanel;
 
 public class DepartmentManagerUI extends AbstractManagerUI<Department> {
+private DepartmentService service;  //복붙쓰
+	
+	
 	public DepartmentManagerUI() {
+		empListByTitleItem.setText(AbstractManagerUI.DEPT_MENU);
 	}
-	private DepartmentService service;  //복붙쓰
+	
+	
 	
 	
 	@Override
