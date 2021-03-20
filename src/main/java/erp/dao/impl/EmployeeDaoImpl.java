@@ -71,7 +71,7 @@ public class EmployeeDaoImpl implements EmployeeDao {// EmployeeDao를 구현하
 		int salary = 0;
 		Department dept = null;
 		
-		try {
+		try {//1
 		title = new Title(rs.getInt("title_no"));
 		manager = new Employee(rs.getInt("manager_no"));
 		salary = rs.getInt("salary");		
