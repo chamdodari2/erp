@@ -15,12 +15,14 @@ import erp.ui.content.EmployeeDetailPanel;
 import erp.ui.content.EmployeePanel;
 import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
+import java.awt.event.ActionListener;
 
 	@SuppressWarnings("serial")
-	public class EmployeeManagerUI extends AbstractManagerUI<Employee> {  //AbstractManagerUI<Employee> 상속받음
+	public class EmployeeManagerUI extends AbstractManagerUI<Employee> implements ActionListener {  //AbstractManagerUI<Employee> 상속받음
 	private EmployeeService service;									  //EmployeeService 객체생성
 	private EmployeeDetailService detailService;						  //EmployeeDatailService 객체생성
-	public EmployeeManagerUI() {										  //EmployeeManagerUI 생성자
+	public EmployeeManagerUI() {
+		btnAdd.addActionListener(this);										  //EmployeeManagerUI 생성자
 			empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);				// 부모UI에서 정의된 메소드 사용 -> empListByTitleItem.settext(EMP_MENU사용)
 		}
 		
@@ -136,4 +138,11 @@ import erp.ui.list.EmployeeTablePanel;
 		
 	}
 
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnAdd) {
+				actionPerformedThisBtnAdd(e);
+			}
+		}
+		protected void actionPerformedThisBtnAdd(ActionEvent e) {
+		}
 }
